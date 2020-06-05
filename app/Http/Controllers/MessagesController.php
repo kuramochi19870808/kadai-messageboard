@@ -12,7 +12,8 @@ class MessagesController extends Controller
     public function index()
     {
         // メッセージ一覧を取得
-        $messages = Message::all();
+        $messages = Message::paginate(10);
+
 
         // メッセージ一覧ビューでそれを表示
         // 第一引数には表示したいViewを指定
@@ -34,11 +35,13 @@ class MessagesController extends Controller
     {
         // バリデーション
         $request->validate([
+            'title' => 'required|max:20',
             'content' => 'required|max:255',
         ]);
         
         // メッセージを作成
         $message = new Message;
+        $message->title = $request->title;
         $message->content = $request->content;
         $message->save();
 
@@ -71,6 +74,7 @@ class MessagesController extends Controller
     {
         // バリデーション
         $request->validate([
+            'title' => 'required|max:20',
             'content' => 'required|max:255',
         ]);
         

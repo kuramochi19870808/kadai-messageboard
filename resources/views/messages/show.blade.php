@@ -10,13 +10,26 @@
             <td>{{ $message->id }}</td>
         </tr>
         <tr>
+            <th>タイトル</th>
+            <td>{{ $message->title }}</td>
+        </tr>
+        <tr>
             <th>メッセージ</th>
             <td>{{ $message->content }}</td>
         </tr>
+        <tr>
+            <th>登録日</th>
+            <td>{{ $message->created_at }}</td>
+        </tr>
+        <tr>
+            <th>更新日</th>
+            <td>{{ $message->updated_at }}</td>
+        </tr>
+
     </table>
 
     {{-- メッセージ編集ページへのリンク --}}
-    {!! link_to_route('messages.edit', 'このメッセージを編集', ['message' => $message->id], ['class' => 'btn btn-light']) !!}
+    {!! link_to_route('messages.edit', 'このメッセージを編集', ['id' => $message->id], ['class' => 'btn btn-success']) !!}
 
     {{-- メッセージ削除フォーム --}}
     {!! Form::model($message, ['route' => ['messages.destroy', $message->id], 'method' => 'delete']) !!}
